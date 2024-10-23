@@ -7,21 +7,28 @@
 
 import SwiftUI
 import UniformTypeIdentifiers
+import MarkdownKit
 
 extension UTType {
-    static var exampleText: UTType {
-        UTType(importedAs: "com.example.plain-text")
+    static var markdownText: UTType {
+        UTType(importedAs: "me.kifio.markdown")
     }
 }
 
 struct kmdeditorDocument: FileDocument {
+    
     var text: String
 
+    var html: String {
+        let md = MarkdownParser.standard.parse(text)
+        return HtmlGenerator.standard.generate(doc: md)
+    }
+    
     init(text: String = "Hello, world!") {
         self.text = text
     }
 
-    static var readableContentTypes: [UTType] { [.exampleText] }
+    static var readableContentTypes: [UTType] { [.markdownText] }
 
     init(configuration: ReadConfiguration) throws {
         guard let data = configuration.file.regularFileContents,
