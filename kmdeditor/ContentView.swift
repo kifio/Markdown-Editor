@@ -8,10 +8,25 @@
 import SwiftUI
 import WebKit
 
+@main
+struct kmdeditorApp: App {
+    var body: some Scene {
+        DocumentGroup(newDocument: kmdeditorDocument()) { file in
+            ContentView(document: file.$document)
+        }
+        .commands { MenuCommands() }
+    }
+}
+
 struct ContentView: View {
+    
+    
+    @AppStorage("editorFontSize")
+    var editorFontSize: Double = 14
+    
     @Binding var document: kmdeditorDocument
     @State private var previewState = PreviewState.web
-
+    
     var body: some View {
         HSplitView {
             TextEditor(text: $document.text)
@@ -41,6 +56,7 @@ struct ContentView: View {
             idealHeight: 400,
             maxHeight: .infinity
         )
+        .font(.system(size: editorFontSize))
         .toolbar {
             ToolbarItem {
                 Picker("", selection: $previewState) {
@@ -65,7 +81,23 @@ enum PreviewState {
 }
 
 struct WebView: NSViewRepresentable {
+    @AppStorage("styleSheet")
+    var styleSheet: StyleSheet = .raywenderlich
+    
     var html: String
+    
+    var formattedHtml: String {
+        return """
+            <html>
+            <head>
+               <link href="\(styleSheet).css" rel="stylesheet">
+            </head>
+            <body>
+               \(html)
+            </body>
+            </html>
+            """
+    }
     
     init(html: String) {
         self.html = html
@@ -76,6 +108,53 @@ struct WebView: NSViewRepresentable {
     }
     
     func updateNSView(_ nsView: WKWebView, context: Context) {
-        nsView.loadHTMLString(html, baseURL: Bundle.main.resourceURL)
+        nsView.loadHTMLString(formattedHtml, baseURL: Bundle.main.resourceURL)
+    }
+}
+
+struct MenuCommands: Commands {
+    
+    @AppStorage("styleSheet")
+    var styleSheet: StyleSheet = .raywenderlich
+    
+    @AppStorage("editorFontSize")
+    var editorFontSize: Double = 14
+    
+    var body: some Commands {
+        CommandMenu("Display") {
+            ForEach(StyleSheet.allCases, id: \.self) { style in
+                Button {
+                    styleSheet = style
+                } label: {
+                    Text(style.rawValue)
+                }
+                
+            }
+            
+            Divider()
+            
+            Menu("Font Size") {
+                Button("Smaller") {
+                    if editorFontSize > 8 {
+                        editorFontSize -= 1
+                    }
+                }
+                .keyboardShortcut("-")
+                
+                Button("Reset") {
+                    editorFontSize = 14
+                }
+                .keyboardShortcut("0")
+                
+                Button("Larger") {
+                    editorFontSize += 1
+                }
+                .keyboardShortcut("+")
+            }
+        }
+        
+//        CommandGroup(replacing: .help) {
+//            NavigationLink(
+//        }
     }
 }

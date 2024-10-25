@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5E96E3782CC985520066C77D /* MarkdownKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5E96E3772CC985520066C77D /* MarkdownKit */; };
+		5E3E89322CCC287F0014737B /* MarkdownKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5E3E89312CCC287F0014737B /* MarkdownKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,7 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E96E3782CC985520066C77D /* MarkdownKit in Frameworks */,
+				5E3E89322CCC287F0014737B /* MarkdownKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,7 +83,7 @@
 			);
 			name = kmdeditor;
 			packageProductDependencies = (
-				5E96E3772CC985520066C77D /* MarkdownKit */,
+				5E3E89312CCC287F0014737B /* MarkdownKit */,
 			);
 			productName = kmdeditor;
 			productReference = 5E9659692CC5A7E50005ECC9 /* kmdeditor.app */;
@@ -114,7 +114,7 @@
 			mainGroup = 5E9659602CC5A7E50005ECC9;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				5E96E3762CC985520066C77D /* XCRemoteSwiftPackageReference "swift-markdownkit" */,
+				5E3E89302CCC287F0014737B /* XCRemoteSwiftPackageReference "swift-markdownkit" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 5E96596A2CC5A7E50005ECC9 /* Products */;
@@ -345,7 +345,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		5E96E3762CC985520066C77D /* XCRemoteSwiftPackageReference "swift-markdownkit" */ = {
+		5E3E89302CCC287F0014737B /* XCRemoteSwiftPackageReference "swift-markdownkit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/objecthub/swift-markdownkit";
 			requirement = {
@@ -356,9 +356,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		5E96E3772CC985520066C77D /* MarkdownKit */ = {
+		5E3E89312CCC287F0014737B /* MarkdownKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 5E96E3762CC985520066C77D /* XCRemoteSwiftPackageReference "swift-markdownkit" */;
+			package = 5E3E89302CCC287F0014737B /* XCRemoteSwiftPackageReference "swift-markdownkit" */;
 			productName = MarkdownKit;
 		};
 /* End XCSwiftPackageProductDependency section */
